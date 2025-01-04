@@ -11,8 +11,13 @@ const FoodCard = ({
   rating,
 }) => {
   return (
-    <Card>
-      <Card.Img variant="top" src={imgdata} />
+    <Card className="shadow" style={{ width: "22rem" }}>
+      <Card.Img
+        variant="top"
+        src={imgdata}
+        className="rounded mt-3"
+        style={{ height: "16rem" }}
+      />
       <Card.Body>
         <div className="d-flex align-items-center justify-content-between">
           <Card.Title>{dish}</Card.Title>
@@ -32,7 +37,7 @@ const FoodCard = ({
           <Card.Text>{address}</Card.Text>
           <Card.Text>${price}</Card.Text>
         </div>
-        <hr style={{ marginTop: "-10px" }} />
+        <hr />
         <div className="d-flex align-items-center justify-content-between">
           <img src={arrimg} alt={dish} style={{ width: "20px" }} />
           <Button variant="success">Add To Cart</Button>

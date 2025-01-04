@@ -1,4 +1,3 @@
-import { Button } from "bootstrap/dist/js/bootstrap.bundle.min";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -16,11 +15,17 @@ function Header() {
           <Nav className="ms-auto">
             <Nav.Link
               as={NavLink}
-              to="/store"
-              className="text-white"
+              to="/cart"
+              className="text-white position-relative"
               variant="outline-primary"
               style={{ width: "45px", height: "45px" }}
             >
+              <span
+                className="cart-counter bg-danger d-flex align-items-center justify-content-center rounded-circle top-0 end-0 position-absolute"
+                style={{ height: "20px", width: "20px" }}
+              >
+                0
+              </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
