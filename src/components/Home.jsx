@@ -11,7 +11,7 @@ const Home = () => {
       </h2>
       <div className="row d-flex justify-content-around align-items-center gap-4">
         {data.map((card) => {
-          return <FoodCard key={card.id} {...card} />;
+          return <FoodCard key={card.id} card={card} />;
         })}
       </div>
     </section>

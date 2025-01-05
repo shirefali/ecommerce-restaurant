@@ -1,74 +1,39 @@
+import Table from "./Table";
+import { clearCart } from "../redux/features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 
 const Cart = () => {
-  const arr = [0];
+  const { products } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
   return (
     <section className="cart container py-4">
       <div className="cart-header d-flex align-items-center justify-content-between bg-black text-white px-4 py-3 rounded-top">
-        <h5>Cart Calculation{arr.length > 0 ? ` (${0})` : ""} </h5>
-        {arr.length > 0 ? <Button variant="danger">Empty Cart</Button> : ""}
+        <h5>
+          Cart Calculation
+          {products.length > 0
+            ? ` (${products.reduce((acc, product) => {
+                return parseInt(acc + parseInt(product.qnty));
+              }, 0)})`
+            : ""}
+        </h5>
+
+        {products.length > 0 ? (
+          <Button
+            variant="danger"
+            onClick={() => {
+              dispatch(clearCart());
+            }}
+          >
+            Empty Cart
+          </Button>
+        ) : (
+          ""
+        )}
       </div>
-      {arr.length > 0 ? (
-        <table className="table cart-table table-responsive-sm shadow rounded-bottom">
-          <thead>
-            <tr>
-              <th>Action</th>
-              <th>Product</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th className="text-end">Total Amount</th>
-            </tr>
-          </thead>
-          <tbody className="my-3">
-            <tr>
-              <td>
-                <Button className="delete-product" variant="danger">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    fill="white"
-                    style={{ width: "20px", height: "20px" }}
-                  >
-                    <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                  </svg>
-                </Button>
-              </td>
-              <td>
-                <div>
-                  <img src="vite.svg" alt="" />
-                </div>
-              </td>
-              <td>Punaj</td>
-              <td>500</td>
-              <td>
-                <div className="d-flex align-items-center">
-                  <Button variant="primary">-</Button>
-                  <span
-                    className="mx-2 fw-bold text-center px-3 py-2 rounded"
-                    style={{ border: "1px solid #000" }}
-                  >
-                    1
-                  </span>
-                  <Button variant="primary">+</Button>
-                </div>
-              </td>
-              <td className="text-end">300</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td colSpan={3}></td>
-              <th>
-                Items In Cart : <span className="text-danger">1</span>
-              </th>
-              <th>
-                Total Price : <span className="text-danger">$1</span>
-              </th>
-            </tr>
-          </tfoot>
-        </table>
+      {products.length > 0 ? (
+        <Table />
       ) : (
         <div className="cart-body shadow p-5 rounded-bottom">
           <div className="text-center">

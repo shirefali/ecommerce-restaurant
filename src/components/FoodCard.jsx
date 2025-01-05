@@ -1,28 +1,24 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { addToCart } from "../redux/features/cartSlice";
+import { useDispatch } from "react-redux";
 
-const FoodCard = ({
-  dish,
-  imgdata,
-  address,
-  delimg,
-  arrimg,
-  price,
-  rating,
-}) => {
+const FoodCard = ({ card }) => {
+  const dispatch = useDispatch();
+
   return (
     <Card className="shadow" style={{ width: "22rem" }}>
       <Card.Img
         variant="top"
-        src={imgdata}
+        src={card.imgdata}
         className="rounded mt-3"
         style={{ height: "16rem" }}
       />
       <Card.Body>
         <div className="d-flex align-items-center justify-content-between">
-          <Card.Title>{dish}</Card.Title>
+          <Card.Title>{card.dish}</Card.Title>
           <span className="bg-success px-2 d-flex align-items-center text-white rounded mb-3">
-            {rating}
+            {card.rating}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 576 512"
@@ -34,14 +30,16 @@ const FoodCard = ({
           </span>
         </div>
         <div className="d-flex align-items-line justify-content-between">
-          <Card.Text>{address}</Card.Text>
-          <Card.Text>${price}</Card.Text>
+          <Card.Text>{card.address}</Card.Text>
+          <Card.Text>${card.price}</Card.Text>
         </div>
         <hr />
         <div className="d-flex align-items-center justify-content-between">
-          <img src={arrimg} alt={dish} style={{ width: "20px" }} />
-          <Button variant="success">Add To Cart</Button>
-          <img src={delimg} alt="del-img" style={{ width: "40px" }} />
+          <img src={card.arrimg} alt={card.dish} style={{ width: "20px" }} />
+          <Button variant="success" onClick={() => dispatch(addToCart(card))}>
+            Add To Cart
+          </Button>
+          <img src={card.delimg} alt="del-img" style={{ width: "40px" }} />
         </div>
       </Card.Body>
     </Card>
