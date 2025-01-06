@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { addToCart } from "../redux/features/cartSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const FoodCard = ({ card }) => {
   const dispatch = useDispatch();
@@ -36,7 +37,13 @@ const FoodCard = ({ card }) => {
         <hr />
         <div className="d-flex align-items-center justify-content-between">
           <img src={card.arrimg} alt={card.dish} style={{ width: "20px" }} />
-          <Button variant="success" onClick={() => dispatch(addToCart(card))}>
+          <Button
+            variant="success"
+            onClick={() =>
+              dispatch(addToCart(card)) &&
+              toast.success("Product Added To Cart")
+            }
+          >
             Add To Cart
           </Button>
           <img src={card.delimg} alt="del-img" style={{ width: "40px" }} />

@@ -8,7 +8,7 @@ function Header() {
   const { products } = useSelector((state) => state.cart);
 
   return (
-    <Navbar className="bg-black mb-4">
+    <Navbar className="bg-black mb-4 sticky-top">
       <Container className="align-items-center">
         <Nav.Link as={NavLink} to="/" className="fw-bold fs-4 text-white">
           Our Food
